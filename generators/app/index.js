@@ -5,18 +5,22 @@ var mkdirp = require('mkdirp');
 
 var baseGenerator = generators.Base.extend({
   welcome: function () {
-    this.log(yosay("Hello, and welcome to react-frontstack"));
+    this.log(yosay("Allo Allo, and welcome to react-frontstack"));
   },
   constructor:function () {
     generators.Base.apply(this,arguments);
     this.argument('appname',{
-      type: String
+      type: String,
+      required: true
     });
     this.appname = _.camelCase(this.appname);
     console.log(this.appname);
   },
   createDirectory:function () {
     mkdirp(this.appname);
+    mkdirp(this.appname+'/src');
+    mkdirp(this.appname+'/test');
+    mkdirp(this.appname+'/gulp_tasks');
   }
 });
 

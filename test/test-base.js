@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 var appname = 'gen-test-repo';
 
-describe('react-flux: ', function () {
+describe('react-flux:', function () {
 
   before(function (done) {
     helpers.run(path.join(__dirname,'../generators/app'))
@@ -21,8 +21,21 @@ describe('react-flux: ', function () {
     var app = require('../generators/app/index.js');
     expect(app).not.to.be.undefinded;
   });
-
-  it('generates a root directory', function () {
-    assert.file(appname);
+  describe('Directory creation:', function () {
+    it('generates a root directory', function () {
+      assert.file(appname);
+    });
+    it('generates a src directory', function (done) {
+      assert.file(appname+'/src');
+      done();
+    });
+    it('generates a test directory', function (done) {
+      assert.file(appname+'/test');
+      done();
+    });
+    it('generates a gulp_tasks directory', function (done) {
+      assert.file(appname+'/gulp_tasks');
+      done();
+    });
   });
 });
