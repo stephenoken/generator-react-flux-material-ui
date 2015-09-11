@@ -10,9 +10,15 @@ var appname = 'gen-test-repo';
 describe('react-flux:', function () {
 
   before(function (done) {
+    var mockPrompt = {
+      description: 'Really cool app that does stuff',
+      keywords: 'Reactjs Enquire.js',
+      git: 'http://github.com'
+    };
     helpers.run(path.join(__dirname,'../generators/app'))
       .inDir(path.join(__dirname,'./tmp'))
       .withArguments([appname])
+      .withPrompts(mockPrompt)
       .on('end',done);
     appname = _.snakeCase(appname);
   });
@@ -21,6 +27,8 @@ describe('react-flux:', function () {
     var app = require('../generators/app/index.js');
     expect(app).not.to.be.undefinded;
   });
+
+
   describe('Directory creation:', function () {
     it('generates a src directory', function (done) {
       assert.file('./src');
@@ -35,10 +43,21 @@ describe('react-flux:', function () {
       done();
     });
   });
-  describe('File creation:', function () {
-      it('generates package.json', function (done) {
-        assert.file('/package.json');
-        done();
+
+
+  describe('Root File creation:', function () {
+
+
+      describe('Package.json:', function () {
+        it('generates package.json', function (done) {
+          assert.file('./package.json');
+          done();
+        });
+        it('contains a prompt details', function (done) {
+          assert.fileContent('./package.json',/['|"]*name['|"]*[ ]*:[ ]*['|"]gen_test_repo['|"]/);
+          assert.fileContent('./package.json',/['|"]*description['|"]*[ ]*:[ ]*['|"]Really cool app that does stuff['|"]/);
+          done();
+        });
       });
   });
 });
