@@ -13,14 +13,18 @@ var baseGenerator = generators.Base.extend({
       type: String,
       required: true
     });
-    this.appname = _.camelCase(this.appname);
+    this.appname = _.snakeCase(this.appname);
     console.log(this.appname);
   },
   createDirectory:function () {
-    mkdirp(this.appname);
-    mkdirp(this.appname+'/src');
-    mkdirp(this.appname+'/test');
-    mkdirp(this.appname+'/gulp_tasks');
+    mkdirp('./src');
+    mkdirp('./test');
+    mkdirp('./gulp_tasks');
+  },
+  createFile: function () {
+    this.fs.copyTpl(this.templatePath('_package.json'),'package.json',{
+      name: this.appname
+    });
   }
 });
 

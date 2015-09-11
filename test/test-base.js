@@ -14,7 +14,7 @@ describe('react-flux:', function () {
       .inDir(path.join(__dirname,'./tmp'))
       .withArguments([appname])
       .on('end',done);
-    appname = _.camelCase(appname);
+    appname = _.snakeCase(appname);
   });
 
   it('can be imported', function () {
@@ -22,20 +22,23 @@ describe('react-flux:', function () {
     expect(app).not.to.be.undefinded;
   });
   describe('Directory creation:', function () {
-    it('generates a root directory', function () {
-      assert.file(appname);
-    });
     it('generates a src directory', function (done) {
-      assert.file(appname+'/src');
+      assert.file('./src');
       done();
     });
     it('generates a test directory', function (done) {
-      assert.file(appname+'/test');
+      assert.file('./test');
       done();
     });
     it('generates a gulp_tasks directory', function (done) {
-      assert.file(appname+'/gulp_tasks');
+      assert.file('./gulp_tasks');
       done();
     });
+  });
+  describe('File creation:', function () {
+      it('generates package.json', function (done) {
+        assert.file('/package.json');
+        done();
+      });
   });
 });
