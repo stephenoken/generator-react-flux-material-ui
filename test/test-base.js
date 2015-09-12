@@ -12,7 +12,7 @@ describe('react-flux:', function () {
   before(function (done) {
     var mockPrompt = {
       description: 'Really cool app that does stuff',
-      keywords: 'Reactjs Enquire.js',
+      keywords: 'Reactjs Enquirejs',
       git: 'http://github.com'
     };
     helpers.run(path.join(__dirname,'../generators/app'))
@@ -56,6 +56,12 @@ describe('react-flux:', function () {
         it('contains a prompt details', function (done) {
           assert.fileContent('./package.json',/['|"]*name['|"]*[ ]*:[ ]*['|"]gen_test_repo['|"]/);
           assert.fileContent('./package.json',/['|"]*description['|"]*[ ]*:[ ]*['|"]Really cool app that does stuff['|"]/);
+          assert.fileContent('./package.json',/['|"]*keywords['|"]*[ ]*:[ ]*\[/);
+          assert.fileContent('./package.json',/['|"]*Reactjs['|"]*[ ]*,/);
+          assert.fileContent('./package.json',/['|"]*Enquirejs['|"]*[ ]*,/);
+          assert.fileContent('./package.json',/['|"]*repository['|"]*[ ]*:[ ]*{/);
+          assert.fileContent('./package.json',/['|"]*type['|"]*[ ]*:[ ]*['|"]git['|"]/);
+          assert.fileContent('./package.json',/['|"]*url['|"]*[ ]*:[ ]*['|"]http:\/\/github.com['|"]/);
           done();
         });
       });

@@ -1,4 +1,11 @@
 {
-"name": "<%=name%>",
-"description": "<%=description%>"
+  "name": "<%=name%>",
+  "description": "<%=description%>",
+  "keywords": [<%for(keyword in keywords){%>
+    "<%=keywords[keyword]%>",<%}%>
+  ],
+  "repository":{
+      "type": "git",
+      "url": "<%=git%>"
+  }
 }
