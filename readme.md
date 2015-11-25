@@ -8,3 +8,7 @@ Flux is the application architecture that Facebook uses for building client-side
   - For version 1.0.0, initial release, the generator will create the front end of an app in an opinionated fashion.
   - Generate stores
 - 1.1.0 --TBD
+
+## Development plan
+- Styling framework
+Should use <a href="https://github.com/google/material-design-lite">MDL</a>
